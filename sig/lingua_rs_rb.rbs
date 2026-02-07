@@ -1,0 +1,42 @@
+module LinguaRsRb
+  VERSION: String
+
+  def self.languages: () -> Array[String]
+  def self.spoken_languages: () -> Array[String]
+  def self.languages_with_arabic_script: () -> Array[String]
+  def self.languages_with_cyrillic_script: () -> Array[String]
+  def self.languages_with_devanagari_script: () -> Array[String]
+  def self.languages_with_latin_script: () -> Array[String]
+  def self.languages_with_single_unique_script: () -> Array[String]
+
+  class LanguageDetectorBuilder
+    def self.from_all_languages: () -> LanguageDetectorBuilder
+    def self.from_all_spoken_languages: () -> LanguageDetectorBuilder
+    def self.from_all_languages_with_arabic_script: () -> LanguageDetectorBuilder
+    def self.from_all_languages_with_cyrillic_script: () -> LanguageDetectorBuilder
+    def self.from_all_languages_with_devanagari_script: () -> LanguageDetectorBuilder
+    def self.from_all_languages_with_latin_script: () -> LanguageDetectorBuilder
+    def self.from_all_languages_with_single_unique_script: () -> LanguageDetectorBuilder
+    def self.from_languages: (Array[String]) -> LanguageDetectorBuilder
+    def self.from_all_languages_without: (Array[String]) -> LanguageDetectorBuilder
+    def self.from_iso_codes_639_1: (Array[String]) -> LanguageDetectorBuilder
+    def self.from_iso_codes_639_3: (Array[String]) -> LanguageDetectorBuilder
+
+    def with_minimum_relative_distance: (Float) -> LanguageDetectorBuilder
+    def with_preloaded_language_models: () -> LanguageDetectorBuilder
+    def with_low_accuracy_mode: () -> LanguageDetectorBuilder
+    def build: () -> LanguageDetector
+  end
+
+  class LanguageDetector
+    def unload_language_models: () -> nil
+    def detect_language: (String) -> String?
+    def detect_languages_in_parallel: (Array[String]) -> Array[String?]
+    def detect_multiple_languages: (String) -> Array[[String, Integer, Integer]]
+    def detect_multiple_languages_in_parallel: (Array[String]) -> Array[Array[[String, Integer, Integer]]]
+    def compute_language_confidence_values: (String) -> Array[[String, Float]]
+    def compute_language_confidence_values_in_parallel: (Array[String]) -> Array[Array[[String, Float]]]
+    def compute_language_confidence: (String, String) -> Float
+    def compute_language_confidence_in_parallel: (Array[String], String) -> Array[Float]
+  end
+end
