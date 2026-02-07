@@ -52,6 +52,4 @@ jobs:
       - name: Build gem
         run: gem build lingua_rs_rb.gemspec
       - name: Publish gem to RubyGems
-        env:
-          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-        run: gem push lingua_rs_rb-*.gem
+        run: gem push lingua_rs_rb-*.gem -k ${{ secrets.RUBYGEMS_API_KEY }}
